@@ -9,7 +9,7 @@ namespace PiSubmarine::I2C::Api
     {
     public:
         virtual ~IDriverAsync() = default;
-        virtual bool WriteAsync(uint8_t deviceAddress, uint8_t* txData, size_t len, PiSubmarine::Api::Internal::I2C::Callback callback) = 0;
-        virtual bool ReadAsync(uint8_t deviceAddress, uint8_t* rxData, size_t len, PiSubmarine::Api::Internal::I2C::Callback callback) = 0;
+        virtual bool WriteAsync(uint8_t deviceAddress, uint8_t* txData, size_t len, Callback callback) = 0;
+        virtual bool ReadAsync(uint8_t deviceAddress, uint8_t* rxData, size_t len, Callback callback) = 0;
     };
 }
