@@ -11,6 +11,8 @@
 #include "PiSubmarine/I2C/Api/Callback.h"
 #include <array>
 
+#include "PiSubmarine/I2C/Api/IDriver.h"
+
 namespace PiSubmarine::I2C::Api
 {
 
@@ -25,7 +27,7 @@ namespace PiSubmarine::I2C::Api
 		std::string Tag;
 	};
 
-	class IDriverAsyncMock : public IDriverAsync
+	class IDriverAsyncMock : public IDriverAsync, public IDriver
 	{
 	public:
 		explicit IDriverAsyncMock(std::array<uint8_t, 0x49>& data) : m_Data(data)
@@ -45,13 +47,13 @@ namespace PiSubmarine::I2C::Api
 			m_SimulateError = value;
 		}
 
-		bool Read(uint8_t deviceAddress, uint8_t* rxData, size_t len)
+		bool Read(uint8_t deviceAddress, uint8_t* rxData, size_t len) override
 		{
 			memcpy(rxData, m_Data.data() + m_DataOffset, len);
 			return !m_SimulateError;
 		}
 
-		bool Write(uint8_t deviceAddress, uint8_t* txData, size_t len)
+		bool Write(uint8_t deviceAddress, uint8_t* txData, size_t len) override
 		{
 			m_DataOffset = txData[0];
 			memcpy(m_Data.data() + m_DataOffset, txData + 1, len - 1);
