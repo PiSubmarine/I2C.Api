@@ -1,6 +1,8 @@
 #pragma once
 
 #include "PiSubmarine/I2C/Api/Callback.h"
+#include <cstdint>
+#include <cstddef>
 
 namespace PiSubmarine::I2C::Api
 {

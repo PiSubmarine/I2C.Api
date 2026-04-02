@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cstddef>
 
 namespace PiSubmarine::I2C::Api
 {
@@ -8,7 +9,7 @@ namespace PiSubmarine::I2C::Api
     {
     public:
         virtual ~IDriver() = default;
-        virtual bool Write(uint8_t deviceAddress, uint8_t* txData, size_t len) = 0;
-        virtual bool Read(uint8_t deviceAddress, uint8_t* rxData, size_t len) = 0;
+        virtual bool Write(uint8_t deviceAddress, uint8_t* txData, std::size_t len) = 0;
+        virtual bool Read(uint8_t deviceAddress, uint8_t* rxData, std::size_t len) = 0;
     };
 }
