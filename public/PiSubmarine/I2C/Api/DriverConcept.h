@@ -11,6 +11,7 @@ namespace PiSubmarine::I2C::Api
 	{
 		{ driver.Write(deviceAddress, txData, len) } -> std::same_as<bool>;
 		{ driver.Read(deviceAddress, rxData, len) } -> std::same_as<bool>;
+		{ driver.WriteRead(deviceAddress, txData, len, rxData, len) } -> std::same_as<bool>;
 	};
 
 }
