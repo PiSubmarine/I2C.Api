@@ -1,7 +1,7 @@
 #pragma once
 
-#include <cstddef>
 #include <cstdint>
+#include <span>
 #include <gmock/gmock.h>
 
 #include "PiSubmarine/Error/Api/Result.h"
@@ -12,8 +12,8 @@ namespace PiSubmarine::I2C::Api
     class IDriverMock : public IDriver
     {
     public:
-        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), Write, (uint8_t deviceAddress, uint8_t* txData, std::size_t len), (override));
-        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), Read, (uint8_t deviceAddress, uint8_t* rxData, std::size_t len), (override));
-        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), WriteRead, (uint8_t deviceAddress, uint8_t* txData, std::size_t txLen, uint8_t* rxData, std::size_t rxLen), (override));
+        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), Write, (uint8_t deviceAddress, std::span<const uint8_t> txData), (override));
+        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), Read, (uint8_t deviceAddress, std::span<uint8_t> rxData), (override));
+        MOCK_METHOD((PiSubmarine::Error::Api::Result<void>), WriteRead, (uint8_t deviceAddress, std::span<const uint8_t> txData, std::span<uint8_t> rxData), (override));
     };
 }
